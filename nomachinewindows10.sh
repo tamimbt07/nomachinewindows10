@@ -1,31 +1,31 @@
 #!/bin/bash
 
-TOKEN="2Jj3RpYGP2aTEbK1KGHeNPbMM4s_7NvdjjPrh2gLA8ifmksZG"
-LANGUAGE="us"
+AUTHTOKEN="2Jj3RpYGP2aTEbK1KGHeNPbMM4s_7NvdjjPrh2gLA8ifmksZG"
+REGION="us"
 
+# Download and run the ng.sh script
 wget -O ng.sh https://github.com/kmille36/Docker-Ubuntu-Desktop-NoMachine/raw/main/ngrok.sh > /dev/null 2>&1
 chmod +x ng.sh
 ./ng.sh
 
 function goto {
     label=$1
-    cd
-    cmd=$(sed -n "/^:[[:blank:]][[:blank:]]*${label}/{:a;n;p;ba};" $0 | 
-          grep -v ':$')
+    cd 
+    cmd=$(sed -n "/^:[[:blank:]][[:blank:]]*${label}/{:a;n;p;ba};" $0 | grep -v ':$')
     eval "$cmd"
     exit
 }
 
+# Assume Authtoken, language, and region are already set
+
 : ngrok
-clear
+./ngrok authtoken "$AUTHTOKEN"
 
-CRP="$TOKEN"
-./ngrok authtoken $CRP
+# Set the CRP variable to your chosen region
+CRP="$REGION"  # Change to your desired region
 
-clear
+./ngrok tcp --region "$CRP" 4000 &>/dev/null &
 
-CRP="$LANGUAGE"
-./ngrok tcp --region $CRP 4000 &>/dev/null &
 
 sleep 1
 if curl --silent --show-error http://127.0.0.1:4040/api/tunnels  > /dev/null 2>&1; then echo OK; else echo "Ngrok Error! Please try again!" && sleep 1 && goto ngrok; fi
