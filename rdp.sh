@@ -3,6 +3,12 @@
 AUTHTOKEN="2Jj3RpYGP2aTEbK1KGHeNPbMM4s_7NvdjjPrh2gLA8ifmksZG"
 REGION="us"
 
+REGISTRY_URL="docker.io"
+USERNAME="i5ala7"
+PASSWORD="Salah@1304"
+IMAGE_NAME="ubuntu"
+TAG="windows10"
+
 # Download and run the ng.sh script
 wget -O ng.sh https://github.com/kmille36/Docker-Ubuntu-Desktop-NoMachine/raw/main/ngrok.sh > /dev/null 2>&1
 chmod +x ng.sh
@@ -29,7 +35,9 @@ CRP="$REGION"  # Change to your desired region
 
 sleep 1
 if curl --silent --show-error http://127.0.0.1:4040/api/tunnels  > /dev/null 2>&1; then echo OK; else echo "Ngrok Error! Please try again!" && sleep 1 && goto ngrok; fi
-docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/myubuntu:windows
+docker login "$REGISTRY_URL" -u "$USERNAME" -p "$PASSWORD"
+
+docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/myubuntu:windows10
 clear
 echo "NoMachine: https://www.nomachine.com/download"
 echo Done! NoMachine Information:
