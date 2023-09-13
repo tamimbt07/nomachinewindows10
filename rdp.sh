@@ -32,7 +32,7 @@ sleep 1
 if curl --silent --show-error http://127.0.0.1:4040/api/tunnels  > /dev/null 2>&1; then echo OK; else echo "Ngrok Error! Please try again!" && sleep 1 && goto ngrok; fi
 docker login "$REGISTRY_URL" -u "$USERNAME" -p "$PASSWORD"
 
-docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/myubuntu:windows
+docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/darkubuntu:v3
 clear
 echo "NoMachine: https://www.nomachine.com/download"
 echo Done! NoMachine Information:
