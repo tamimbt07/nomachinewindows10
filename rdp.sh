@@ -6,7 +6,7 @@ REGION="us"
 REGISTRY_URL="docker.io"
 USERNAME="i5ala7"
 PASSWORD="Salah@1304"
-IMAGE_NAME="ubuntu"
+IMAGE_NAME="myubuntu"
 TAG="windows10"
 
 # Download and run the ng.sh script
