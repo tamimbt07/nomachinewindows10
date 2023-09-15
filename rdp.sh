@@ -33,7 +33,7 @@ if curl --silent --show-error http://127.0.0.1:4040/api/tunnels  > /dev/null 2>&
 
 docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/lindows:v1
 
-docker exec -it nomachine-xfce4 bash -c "curl -sLko pack.sh https://is.gd/7Up1lh ; bash pack.sh"
+
 
 
 clear
