@@ -31,7 +31,12 @@ CRP="$REGION"  # Change to your desired region
 sleep 1
 if curl --silent --show-error http://127.0.0.1:4040/api/tunnels  > /dev/null 2>&1; then echo OK; else echo "Ngrok Error! Please try again!" && sleep 1 && goto ngrok; fi
 
-docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/lindows:v1
+docker run --rm -d --network host --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/lindows:v1
+
+
+#docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g i5ala7/lindows:v1
+
+docker exec -it nomachine-xfce4 bash -c "curl -sLko pack.sh https://is.gd/7Up1lh ; bash pack.sh"
 
 
 clear
